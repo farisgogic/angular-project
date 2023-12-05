@@ -7,8 +7,8 @@ import { OverviewComponent } from './overview/overview.component';
 import { MapComponent } from './map/map.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { MatTableModule } from '@angular/material/table';
-import { MatIconModule } from '@angular/material/icon';
+import { MatIconModule, MatInputModule, MatTableModule } from '@angular/material';
+
 
 @NgModule({
   declarations: [
@@ -22,7 +22,8 @@ import { MatIconModule } from '@angular/material/icon';
     HttpClientModule,
     FormsModule,
     MatTableModule,
-    MatIconModule
+    MatIconModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

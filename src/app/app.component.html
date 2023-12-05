@@ -1,3 +1,5 @@
+
+
 <div>
   <h2>Select Road</h2>
   <select [(ngModel)]="selectedRoadId" (change)="onRoadSelected()">
@@ -7,25 +9,94 @@
 
 <div *ngIf="roadworksData">
   <h2>Roadworks</h2>
-  <!-- <mat-table [dataSource]="roadworksData"> -->
-    <!-- Define columns for roadworks -->
-    <!-- Example: -->
-    <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
-      <mat-cell *matCellDef="let roadwork">{{ roadwork.name }}</mat-cell>
+  <mat-table [dataSource]="roadworksData">
+    <ng-container matColumnDef="title">
+      <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
+      <mat-cell *matCellDef="let roadwork">{{ roadwork.title }}</mat-cell>
     </ng-container>
-    <!-- Add more columns as needed -->
-    <mat-header-row *matHeaderRowDef="['name']"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: ['name']"></mat-row>
-  <!-- </mat-table> -->
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+      <mat-cell *matCellDef="let roadwork">{{
+        roadwork.description.join(", ")
+      }}</mat-cell>
+    </ng-container>
+    <mat-header-row
+      *matHeaderRowDef="['title', 'description']"
+    ></mat-header-row>
+    <mat-row *matRowDef="let row; columns: ['title', 'description']"></mat-row>
+  </mat-table>
 </div>
 
 <div *ngIf="webcamsData">
   <h2>Webcams</h2>
-  <!-- Display webcamsData -->
+  <mat-table [dataSource]="webcamsData">
+    <ng-container matColumnDef="webcamName">
+      <mat-header-cell *matHeaderCellDef>Webcam Name</mat-header-cell>
+      <mat-cell *matCellDef="let webcam">{{ webcam.webcamName }}</mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="['webcamName']"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: ['webcamName']"></mat-row>
+  </mat-table>
+</div>
+
+<div *ngIf="restAreasData">
+  <h2>Rest Areas</h2>
+  <mat-table [dataSource]="restAreasData">
+    <ng-container matColumnDef="title">
+      <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
+      <mat-cell *matCellDef="let restArea">{{ restArea.title }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+      <mat-cell *matCellDef="let restArea">{{
+        restArea.description.join(", ")
+      }}</mat-cell>
+    </ng-container>
+    <mat-header-row
+      *matHeaderRowDef="['title', 'description']"
+    ></mat-header-row>
+    <mat-row *matRowDef="let row; columns: ['title', 'description']"></mat-row>
+  </mat-table>
+</div>
+
+<div *ngIf="trafficReportsData">
+  <h2>Traffic reports</h2>
+  <mat-table [dataSource]="trafficReportsData">
+    <ng-container matColumnDef="title">
+      <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
+      <mat-cell *matCellDef="let trafficReport">{{ trafficReport.title }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+      <mat-cell *matCellDef="let trafficReport">{{
+        trafficReport.description.join(", ")
+      }}</mat-cell>
+    </ng-container>
+    <mat-header-row
+      *matHeaderRowDef="['title', 'description']"
+    ></mat-header-row>
+    <mat-row *matRowDef="let row; columns: ['title', 'description']"></mat-row>
+  </mat-table>
 </div>
 
 <div *ngIf="chargingStationsData">
   <h2>Charging Stations</h2>
-  <!-- Display chargingStationsData -->
+  <mat-table [dataSource]="chargingStationsData">
+    <ng-container matColumnDef="title">
+      <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
+      <mat-cell *matCellDef="let chargingStation">{{
+        chargingStation.title
+      }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+      <mat-cell *matCellDef="let chargingStation">{{
+        chargingStation.description.join(", ")
+      }}</mat-cell>
+    </ng-container>
+    <mat-header-row
+      *matHeaderRowDef="['title', 'description']"
+    ></mat-header-row>
+    <mat-row *matRowDef="let row; columns: ['title', 'description']"></mat-row>
+  </mat-table>
 </div>

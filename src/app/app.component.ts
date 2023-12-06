@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from './data.service';
+import { Router } from '@angular/router';
+import { ChargingStation, RestArea, Roadwork, TrafficReport, Webcam } from './data.model';
 
 @Component({
   selector: 'app-root',
@@ -9,13 +11,13 @@ import { DataService } from './data.service';
 export class AppComponent implements OnInit{
   roads: any[] = [];
   selectedRoadId: string = '';
-  roadworksData: any;
-  webcamsData: any;
-  chargingStationsData: any;
-  restAreasData: any;
-  trafficReportsData: any;
+  roadworksData: Roadwork[] = [];
+  webcamsData: Webcam[] = [];
+  chargingStationsData: ChargingStation[] = [];
+  restAreasData: RestArea[] = [];
+  trafficReportsData: TrafficReport[] = [];
 
-  constructor(private dataService: DataService) {}
+  constructor(private dataService: DataService, private router: Router) {}
 
   ngOnInit(): void {
     this.dataService.getRoads().subscribe((data:any) => {
@@ -80,6 +82,11 @@ export class AppComponent implements OnInit{
   }
   
   
+
+  openMap(coordinates: { lat: string; long: string }): void {
+    const url = `https://www.google.com/maps?q=${coordinates.lat},${coordinates.long}`;
   
+    window.open(url, '_blank');
+  }
   
 }

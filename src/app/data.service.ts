@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Roadwork } from './data.model';
 
 @Injectable({
   providedIn: 'root',
@@ -16,8 +17,7 @@ export class DataService {
   }
 
   getRoadworks(roadId: string): Observable<any> {
-    const endpoint = `${this.apiUrl}/${roadId}/services/roadworks`;
-    return this.http.get(endpoint);
+    return this.http.get<{ roadworks: Roadwork[] }>(`${this.apiUrl}/roadworks/${roadId}`);
   }
 
   getRoadworkDetails(roadworkId: string): Observable<any> {

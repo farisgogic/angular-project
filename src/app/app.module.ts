@@ -5,7 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { MatIconModule, MatInputModule, MatTableModule } from '@angular/material';
+import { MatIconModule, MatInputModule, MatSelectModule, MatSortModule, MatTableModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -19,7 +20,10 @@ import { MatIconModule, MatInputModule, MatTableModule } from '@angular/material
     FormsModule,
     MatTableModule,
     MatIconModule,
-    MatInputModule
+    MatInputModule,
+    MatSelectModule,
+    BrowserAnimationsModule,
+    MatSortModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -20,6 +20,10 @@ export class AppComponent implements OnInit{
   constructor(private dataService: DataService, private router: Router) {}
 
   ngOnInit(): void {
+    this.loadData();
+  }
+
+  loadData(){
     this.dataService.getRoads().subscribe((data:any) => {
       this.roads = data.roads;
       this.selectedRoadId = this.roads.length > 0 ? this.roads[0] : '';

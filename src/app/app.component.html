@@ -1,10 +1,11 @@
 
-<div>
+<div class="container">
   <h2>Select Road</h2>
-  <select [(ngModel)]="selectedRoadId" (change)="onRoadSelected()">
+  <select [(ngModel)]="selectedRoadId" (change)="onRoadSelected()" style="height: 40px;">
     <option *ngFor="let road of roads" [value]="road">{{ road }}</option>
   </select>
 </div>
+
 
 <div *ngIf="roadworksData">
   <h2>Roadworks</h2>
@@ -17,12 +18,12 @@
       <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
       <mat-cell *matCellDef="let roadwork">{{ roadwork.description.join(", ") }}</mat-cell>
     </ng-container>
-    <ng-container matColumnDef="viewOnMap" >
-      <mat-header-cell *matHeaderCellDef style="display: flex; justify-content: center; align-items: center;">View on Map</mat-header-cell>
-      <mat-cell *matCellDef="let roadwork" style="display: flex; justify-content: center; align-items: center;">
+    <ng-container matColumnDef="viewOnMap">
+      <mat-header-cell *matHeaderCellDef>View on Map</mat-header-cell>
+      <mat-cell *matCellDef="let roadwork">
         <ng-container *ngIf="roadwork.coordinate && roadwork.coordinate.lat && roadwork.coordinate.long">
           <button mat-icon-button (click)="openMap(roadwork.coordinate)">
-            <mat-icon aria-label="View on Map">map</mat-icon>
+            <mat-icon aria-label="View on Map">location_on</mat-icon>
           </button>
         </ng-container>
       </mat-cell>

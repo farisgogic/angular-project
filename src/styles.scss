@@ -1,1 +1,21 @@
-/* You can add global styles to this file, and also import other style files */
+.mat-header-cell{
+    font-weight: bold;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+}
+
+.mat-cell{
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+}
+
+h2{
+    margin-right: 20px; 
+}
+
+.container{
+    display: flex; 
+    align-items: center;
+}

@@ -1,0 +1,39 @@
+h2 {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .road-selection {
+    display: flex;
+    align-items: center;
+  }
+  
+  button {
+    display: flex;
+    align-items: center;
+  }
+  
+  .mat-icon {
+    color: chocolate;
+  }
+  
+  .info-table {
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  .mat-header-cell,
+  .mat-cell {
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }

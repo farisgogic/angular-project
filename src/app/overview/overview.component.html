@@ -1,0 +1,183 @@
+
+<h2>Select Road</h2>
+<div class="container" style="justify-content: space-between;">
+    <select [(ngModel)]="selectedRoadId" (change)="onRoadSelected()" style="height: 40px; margin-right: 10px;margin-left: 20px;">
+      <option *ngFor="let road of roads" [value]="road">{{ road }}</option>
+    </select>
+  
+    <button mat-button (click)="openGoogleMaps()" style="display: flex; align-items: center; justify-content: center; margin-right: 20px;">
+      <mat-icon style="margin-right: 8px; color: chocolate;">map</mat-icon> Show All Info On Map For {{this.selectedRoadId}}
+    </button>
+    
+  </div>
+  
+  <div *ngIf="roadworksData">
+    <h2>Roadworks</h2>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
+    <mat-table [dataSource]="dataSource" matSort class="info-table">
+      <ng-container matColumnDef="title">
+        <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
+        <mat-cell *matCellDef="let roadwork">{{ roadwork.title }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="description">
+        <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+        <mat-cell *matCellDef="let roadwork">{{ roadwork.description.join(", ") }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="viewOnMap">
+        <mat-header-cell *matHeaderCellDef>View on Map</mat-header-cell>
+        <mat-cell *matCellDef="let roadwork">
+          <ng-container *ngIf="roadwork.coordinate && roadwork.coordinate.lat && roadwork.coordinate.long">
+            <button mat-icon-button (click)="openMap(roadwork.coordinate)">
+              <mat-icon aria-label="View on Map">location_on</mat-icon>
+            </button>
+          </ng-container>
+        </mat-cell>
+      </ng-container>
+      
+      <mat-header-row *matHeaderRowDef="['title', 'description',  'viewOnMap']"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['title', 'description', 'viewOnMap']"></mat-row>
+    </mat-table>
+  </div>
+  
+  
+  
+  <div *ngIf="webcamsData">
+    <h2>Webcams</h2>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
+    <mat-table [dataSource]="dataSourceWebCam" matSort class="info-table">
+      <ng-container matColumnDef="webcamName">
+        <mat-header-cell *matHeaderCellDef>Webcam Name</mat-header-cell>
+        <mat-cell *matCellDef="let webcam">{{ webcam.webcamName }}</mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="['webcamName']"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['webcamName']"></mat-row>
+    </mat-table>
+  </div>
+  
+  <div *ngIf="restAreasData">
+    <h2>Rest Areas</h2>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
+    <mat-table [dataSource]="dataSourceRestArea" matSort class="info-table">
+      <ng-container matColumnDef="title">
+        <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
+        <mat-cell *matCellDef="let restArea">{{ restArea.title }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="description">
+        <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+        <mat-cell *matCellDef="let restArea">{{
+          restArea.description.join(", ")
+        }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="lat">
+        <mat-header-cell *matHeaderCellDef>lat</mat-header-cell>
+        <mat-cell *matCellDef="let restArea">{{ restArea.lat }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="viewOnMap" >
+        <mat-header-cell *matHeaderCellDef >View on Map</mat-header-cell>
+        <mat-cell *matCellDef="let restArea">
+          <ng-container *ngIf="restArea.coordinate && restArea.coordinate.lat && restArea.coordinate.long">
+            <button mat-icon-button (click)="openMap(restArea.coordinate)">
+              <mat-icon aria-label="View on Map">location_on</mat-icon>
+            </button>
+          </ng-container>
+        </mat-cell>
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="['title', 'description',  'viewOnMap']"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['title', 'description', 'viewOnMap']"></mat-row>
+    </mat-table>
+  </div>
+  
+  <div *ngIf="trafficReportsData">
+    <h2>Traffic reports</h2>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
+    <mat-table [dataSource]="dataSourceTrafficReports" matSort class="info-table">
+      <ng-container matColumnDef="title">
+        <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
+        <mat-cell *matCellDef="let trafficReport">{{ trafficReport.title }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="description">
+        <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+        <mat-cell *matCellDef="let trafficReport">{{
+          trafficReport.description.join(", ")
+        }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="viewOnMap" >
+        <mat-header-cell *matHeaderCellDef >View on Map</mat-header-cell>
+        <mat-cell *matCellDef="let trafficReport">
+          <ng-container *ngIf="trafficReport.coordinate && trafficReport.coordinate.lat && trafficReport.coordinate.long">
+            <button mat-icon-button (click)="openMap(trafficReport.coordinate)">
+              <mat-icon aria-label="View on Map">location_on</mat-icon>
+            </button>
+          </ng-container>
+        </mat-cell>
+      </ng-container>
+      
+      <mat-header-row *matHeaderRowDef="['title', 'description',  'viewOnMap']"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['title', 'description', 'viewOnMap']"></mat-row>
+    </mat-table>
+  </div>
+
+  <div *ngIf="ClosuresData">
+    <h2>Closure</h2>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
+    <mat-table [dataSource]="dataSourceClosure" matSort class="info-table">
+      <ng-container matColumnDef="title">
+        <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
+        <mat-cell *matCellDef="let closure">{{ closure.title }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="description">
+        <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+        <mat-cell *matCellDef="let closure">{{
+          closure.description.join(", ")
+        }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="viewOnMap" >
+        <mat-header-cell *matHeaderCellDef >View on Map</mat-header-cell>
+        <mat-cell *matCellDef="let closure" >
+          <ng-container *ngIf="closure.coordinate && closure.coordinate.lat && closure.coordinate.long">
+            <button mat-icon-button (click)="openMap(closure.coordinate)">
+              <mat-icon aria-label="View on Map">location_on</mat-icon>
+            </button>
+          </ng-container>
+        </mat-cell>
+      </ng-container>
+      
+      <mat-header-row *matHeaderRowDef="['title', 'description',  'viewOnMap']"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['title', 'description', 'viewOnMap']"></mat-row>
+    </mat-table>
+  </div>
+  
+  <div *ngIf="chargingStationsData">
+    <h2>Charging Stations</h2>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
+    <mat-table [dataSource]="dataSourceChargingStations" matSort class="info-table">
+      <ng-container matColumnDef="title">
+        <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
+        <mat-cell *matCellDef="let chargingStation">{{
+          chargingStation.title
+        }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="description">
+        <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+        <mat-cell *matCellDef="let chargingStation">{{
+          chargingStation.description.join(", ")
+        }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="viewOnMap" >
+        <mat-header-cell *matHeaderCellDef >View on Map</mat-header-cell>
+        <mat-cell *matCellDef="let chargingStation">
+          <ng-container *ngIf="chargingStation.coordinate && chargingStation.coordinate.lat && chargingStation.coordinate.long">
+            <button mat-icon-button (click)="openMap(chargingStation.coordinate)">
+              <mat-icon aria-label="View on Map">location_on</mat-icon>
+            </button>
+          </ng-container>
+        </mat-cell>
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="['title', 'description',  'viewOnMap']"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['title', 'description', 'viewOnMap']"></mat-row>
+    </mat-table>
+    
+
+  </div>

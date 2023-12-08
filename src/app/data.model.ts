@@ -19,6 +19,12 @@ export interface Roadwork {
     title: string;
     description: string[];
   }
+
+  export interface Closure {
+    title: string;
+    description: string[];
+  }
+  
   
   export interface ChargingStation {
     title: string;

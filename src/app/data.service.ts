@@ -20,6 +20,16 @@ export class DataService {
     return this.http.get<{ roadworks: Roadwork[] }>(`${this.apiUrl}/roadworks/${roadId}`);
   }
 
+  getData(roadId: string, dataType: string, page: number, itemsPerPage: number): Observable<any> {
+    const endpoint = `${this.apiUrl}/${roadId}/services/${dataType}`;
+    const params = {
+      page: page.toString(),
+      itemsPerPage: itemsPerPage.toString(),
+    };
+
+    return this.http.get(endpoint, { params });
+  }
+
   getRoadworkDetails(roadworkId: string): Observable<any> {
     const endpoint = `${this.apiUrl}/details/roadworks/${roadworkId}`;
     return this.http.get(endpoint);

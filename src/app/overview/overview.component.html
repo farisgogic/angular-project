@@ -1,23 +1,25 @@
 
 <h2>Select Road</h2>
-<div class="container" style="justify-content: space-between;">
-    <select [(ngModel)]="selectedRoadId" (change)="onRoadSelected()" style="height: 40px; margin-right: 10px;margin-left: 20px;">
-      <option *ngFor="let road of roads" [value]="road">{{ road }}</option>
-    </select>
-  
-    <button mat-button (click)="openGoogleMaps()" style="display: flex; align-items: center; justify-content: center; margin-right: 20px;">
-      <mat-icon style="margin-right: 8px; color: chocolate;">map</mat-icon> Show All Info On Map For {{this.selectedRoadId}}
+<div class="container road-selection">
+    <mat-select [(ngModel)]="selectedRoadId" (ngModelChange)="onRoadSelected()" class="mat-select">
+        <mat-option *ngFor="let road of roads" [value]="road">{{ road }}</mat-option>
+    </mat-select>
+
+    <button mat-button (click)="openGoogleMaps()">
+        <mat-icon class="mat-icon">map</mat-icon> Show All Info On Map For {{ this.selectedRoadId }}
     </button>
-    
-  </div>
+</div>
   
   <div *ngIf="roadworksData">
-    <h2>Roadworks</h2>
     <mat-paginator [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
-    <mat-table [dataSource]="dataSource" matSort class="info-table">
+    <h2>Roadworks</h2>
+    <mat-table [dataSource]="dataSource" class="info-table">
       <ng-container matColumnDef="title">
         <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
-        <mat-cell *matCellDef="let roadwork">{{ roadwork.title }}</mat-cell>
+        <mat-cell *matCellDef="let roadwork" class="title-and-subtitle">
+          <span class="title">{{ roadwork.title }}</span>
+          <span class="subtitle">{{ roadwork.subtitle }}</span>
+        </mat-cell>           
       </ng-container>
       <ng-container matColumnDef="description">
         <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
@@ -43,8 +45,7 @@
   
   <div *ngIf="webcamsData">
     <h2>Webcams</h2>
-    <mat-paginator [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
-    <mat-table [dataSource]="dataSourceWebCam" matSort class="info-table">
+    <mat-table [dataSource]="dataSourceWebCam" class="info-table">
       <ng-container matColumnDef="webcamName">
         <mat-header-cell *matHeaderCellDef>Webcam Name</mat-header-cell>
         <mat-cell *matCellDef="let webcam">{{ webcam.webcamName }}</mat-cell>
@@ -56,11 +57,13 @@
   
   <div *ngIf="restAreasData">
     <h2>Rest Areas</h2>
-    <mat-paginator [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
-    <mat-table [dataSource]="dataSourceRestArea" matSort class="info-table">
+    <mat-table [dataSource]="dataSourceRestArea" class="info-table">
       <ng-container matColumnDef="title">
         <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
-        <mat-cell *matCellDef="let restArea">{{ restArea.title }}</mat-cell>
+        <mat-cell *matCellDef="let restArea" class="title-and-subtitle">
+          <span class="title">{{ restArea.title }}</span>
+          <span class="subtitle">{{ restArea.subtitle }}</span>
+        </mat-cell>  
       </ng-container>
       <ng-container matColumnDef="description">
         <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
@@ -90,11 +93,13 @@
   
   <div *ngIf="trafficReportsData">
     <h2>Traffic reports</h2>
-    <mat-paginator [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
-    <mat-table [dataSource]="dataSourceTrafficReports" matSort class="info-table">
+    <mat-table [dataSource]="dataSourceTrafficReports" class="info-table">
       <ng-container matColumnDef="title">
         <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
-        <mat-cell *matCellDef="let trafficReport">{{ trafficReport.title }}</mat-cell>
+        <mat-cell *matCellDef="let trafficReport" class="title-and-subtitle">
+          <span class="title">{{ trafficReport.title }}</span>
+          <span class="subtitle">{{ trafficReport.subtitle }}</span>
+        </mat-cell>  
       </ng-container>
       <ng-container matColumnDef="description">
         <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
@@ -120,11 +125,13 @@
 
   <div *ngIf="ClosuresData">
     <h2>Closure</h2>
-    <mat-paginator [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
-    <mat-table [dataSource]="dataSourceClosure" matSort class="info-table">
+    <mat-table [dataSource]="dataSourceClosure" class="info-table">
       <ng-container matColumnDef="title">
         <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
-        <mat-cell *matCellDef="let closure">{{ closure.title }}</mat-cell>
+        <mat-cell *matCellDef="let closure" class="title-and-subtitle">
+          <span class="title">{{ closure.title }}</span>
+          <span class="subtitle">{{ closure.subtitle }}</span>
+        </mat-cell>  
       </ng-container>
       <ng-container matColumnDef="description">
         <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
@@ -150,13 +157,13 @@
   
   <div *ngIf="chargingStationsData">
     <h2>Charging Stations</h2>
-    <mat-paginator [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
-    <mat-table [dataSource]="dataSourceChargingStations" matSort class="info-table">
+    <mat-table [dataSource]="dataSourceChargingStations" class="info-table">
       <ng-container matColumnDef="title">
         <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
-        <mat-cell *matCellDef="let chargingStation">{{
-          chargingStation.title
-        }}</mat-cell>
+        <mat-cell *matCellDef="let chargingStation" class="title-and-subtitle">
+          <span class="title">{{ chargingStation.title }}</span>
+          <span class="subtitle">{{ chargingStation.subtitle }}</span>
+        </mat-cell>  
       </ng-container>
       <ng-container matColumnDef="description">
         <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>

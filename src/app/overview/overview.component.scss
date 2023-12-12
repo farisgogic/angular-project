@@ -1,39 +1,52 @@
 h2 {
-    margin-left: 20px;
-    margin-right: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.road-selection {
+  display: flex;
+  align-items: center;
+}
+
+.mat-select {
+  width: 15%;
+  height: 40px;
+}
+
+button {
+  display: flex;
+  align-items: center;
+}
+
+.mat-icon {
+  color: chocolate;
+}
+
+.info-table {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.title-and-subtitle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  .title {
+    font-weight: bold;
   }
-  
-  .container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 20px;
-  }
-  
-  .road-selection {
-    display: flex;
-    align-items: center;
-  }
-  
-  button {
-    display: flex;
-    align-items: center;
-  }
-  
-  .mat-icon {
-    color: chocolate;
-  }
-  
-  .info-table {
-    width: 100%;
+
+  .subtitle {
+    font-weight: normal;
+    font-size: small;
     margin-top: 10px;
   }
-  
-  .mat-header-cell,
-  .mat-cell {
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
+}

@@ -1,27 +1,68 @@
-# AngularProject
+# Angular Project
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.3.
+## Overview
 
-## Development server
+Welcome to the Angular Project! This project is designed to showcase a sample Angular application that interacts with the Autobahn API.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Prerequisites
 
-## Code scaffolding
+Before you begin, make sure you have the following installed on your machine:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Docker
+- Git
 
-## Build
+## Getting Started
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### 1. Clone the Repository
+```
+git clone https://github.com/farisgogic/angular-project.git
+```
+### 2. Navigate to the Project Directory
+```
+cd angular-project
+```
+### 3. Build the Docker Image
+```
+docker build -t autobahn-angular-project .
+```
+This command will build the Docker image containing the Angular app and its dependencies.
 
-## Running unit tests
+### 4. Run the Docker Container
+```
+docker run -p 8080:80 --name autobahn autobahn-angular-project
+```
+Replace `autobahn` with the desired name for your container.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### 5. Access the App
 
-## Running end-to-end tests
+Open your web browser and go to http://localhost:8080 to access the Angular app.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Additional Information
 
-## Further help
+- **Stopping the Container:**
+  To stop the Docker container, you can use the following command:
+```
+docker stop autobahn
+```
+Replace `autobahn` with the actual name of your container.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- **Removing the Container:**
+If you want to remove the Docker container (after stopping it), use the following command:
+```
+docker rm autobahn
+```
+- **Removing the Image:**
+To remove the Docker image, you can use:
+```
+docker rmi autobahn-angular-project
+```
+## Customization
+
+Feel free to explore and modify the code to suit your needs. The project structure includes:
+
+- src/: Angular source code.
+- Dockerfile: Configuration for Docker container.
+
+If you encounter any issues or have questions, please don't hesitate to reach out.
+
+Happy coding!

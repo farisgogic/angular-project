@@ -1,4 +1,4 @@
-# Angular Project
+# Autobahn Dashboard
 
 ## Overview
 
@@ -15,11 +15,11 @@ Before you begin, make sure you have the following installed on your machine:
 
 ### 1. Clone the Repository
 ```
-git clone https://github.com/farisgogic/angular-project.git
+git clone https://github.com/farisgogic/autobahn-dashboard.git
 ```
 ### 2. Navigate to the Project Directory
 ```
-cd angular-project
+cd autobahn-dashboard
 ```
 ### 3. Build the Docker Image
 ```

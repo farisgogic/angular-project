@@ -19,6 +19,12 @@ export class OverviewComponent implements OnInit{
   restAreasData: RestArea[] = [];
   trafficReportsData: TrafficReport[] = [];
   ClosuresData: Closure[] = [];
+  roadworksLoaded: boolean = false;
+  webcamsLoaded: boolean = false;
+  chargingStationsLoaded: boolean = false;
+  restAreasLoaded: boolean = false;
+  trafficReportsLoaded: boolean = false;
+  closuresLoaded: boolean = false;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   dataSource = new MatTableDataSource<Roadwork>();
   dataSourceWebCam = new MatTableDataSource<Webcam>();
@@ -52,67 +58,89 @@ export class OverviewComponent implements OnInit{
 
   onRoadSelected(): void {
     if (this.selectedRoadId) {
+      this.resetLoadedFlags();
       this.dataService.getRoadworks(this.selectedRoadId).subscribe((data: any) => {
+        this.roadworksLoaded = true;
         if (data && Array.isArray(data.roadworks)) {
           this.roadworksData = data.roadworks;
           this.dataSource.data = this.roadworksData;
         } else {
+          this.roadworksData = [];
+          this.dataSource.data = [];
           console.error('Invalid data format for roadworks:', data);
         }
       });
   
       this.dataService.getWebcams(this.selectedRoadId).subscribe((data: any) => {
+        this.webcamsLoaded = true;
         if (data && Array.isArray(data.webcam)) {
           this.webcamsData = data.webcam;
           this.dataSourceWebCam.data = this.webcamsData;
-          
         } else {
+          this.webcamsData = [];
+          this.dataSourceWebCam.data = [];
           console.error('Invalid data format for webcams:', data);
         }
       });
 
       this.dataService.getRestAreas(this.selectedRoadId).subscribe((data: any) => {
+        this.restAreasLoaded = true;
         if (data && Array.isArray(data.parking_lorry)) {
           this.restAreasData = data.parking_lorry;
           this.dataSourceRestArea.data = this.restAreasData;
-      
         } else {
+          this.restAreasData = [];
+          this.dataSourceRestArea.data = [];
           console.error('Invalid data format for rest areas:', data);
         }
       });
       
       this.dataService.getTrafficReports(this.selectedRoadId).subscribe((data: any) => {
+        this.trafficReportsLoaded = true;
         if (data && Array.isArray(data.warning)) {
           this.trafficReportsData = data.warning;
           this.dataSourceTrafficReports.data = this.trafficReportsData;
-      
         } else {
-          console.error('Invalid data format for rest areas:', data);
+          this.trafficReportsData = [];
+          this.dataSourceTrafficReports.data = [];
+          console.error('Invalid data format for traffic reports:', data);
         }
       });
 
       this.dataService.getSuspensions(this.selectedRoadId).subscribe((data: any) => {
+        this.closuresLoaded = true;
         if (data && Array.isArray(data.closure)) {
           this.ClosuresData = data.closure;
           this.dataSourceClosure.data = this.ClosuresData;
-      
         } else {
-          console.error('Invalid data format for rest areas:', data);
+          this.ClosuresData = [];
+          this.dataSourceClosure.data = [];
+          console.error('Invalid data format for closures:', data);
         }
       });
   
       this.dataService.getElectricChargingStations(this.selectedRoadId).subscribe((data: any) => {
+        this.chargingStationsLoaded = true;
         if (data && Array.isArray(data.electric_charging_station)) {
           this.chargingStationsData = data.electric_charging_station;
           this.dataSourceChargingStations.data = this.chargingStationsData;
-  
         } else {
+          this.chargingStationsData = [];
+          this.dataSourceChargingStations.data = [];
           console.error('Invalid data format for charging stations:', data);
         }
       });
     }
   }
-  
+
+  resetLoadedFlags(): void {
+    this.roadworksLoaded = false;
+    this.webcamsLoaded = false;
+    this.chargingStationsLoaded = false;
+    this.restAreasLoaded = false;
+    this.trafficReportsLoaded = false;
+    this.closuresLoaded = false;
+  }
 
   openMap(coordinates: { lat: string; long: string }): void {
     const url = `https://www.google.com/maps?q=${coordinates.lat},${coordinates.long}`;

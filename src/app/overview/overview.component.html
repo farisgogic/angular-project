@@ -10,10 +10,11 @@
     </button>
 </div>
   
-  <div *ngIf="roadworksData">
-    <mat-paginator [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
+  <div *ngIf="roadworksLoaded">
     <h2>Roadworks</h2>
-    <mat-table [dataSource]="dataSource" class="info-table">
+    <div *ngIf="roadworksData && roadworksData.length > 0; else noRoadworksData">
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
+      <mat-table [dataSource]="dataSource" class="info-table">
       <ng-container matColumnDef="title">
         <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
         <mat-cell *matCellDef="let roadwork" class="title-and-subtitle">
@@ -36,28 +37,40 @@
         </mat-cell>
       </ng-container>
       
-      <mat-header-row *matHeaderRowDef="['title', 'description',  'viewOnMap']"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: ['title', 'description', 'viewOnMap']"></mat-row>
-    </mat-table>
+        <mat-header-row *matHeaderRowDef="['title', 'description',  'viewOnMap']"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: ['title', 'description', 'viewOnMap']"></mat-row>
+      </mat-table>
+    </div>
+    <ng-template #noRoadworksData>
+      <div class="no-data-message">
+        <p>No roadworks data available for {{ selectedRoadId }}.</p>
+      </div>
+    </ng-template>
   </div>
   
-  
-  
-  <div *ngIf="webcamsData">
+  <div *ngIf="webcamsLoaded">
     <h2>Webcams</h2>
-    <mat-table [dataSource]="dataSourceWebCam" class="info-table">
+    <div *ngIf="webcamsData && webcamsData.length > 0; else noWebcamsData">
+      <mat-table [dataSource]="dataSourceWebCam" class="info-table">
       <ng-container matColumnDef="webcamName">
         <mat-header-cell *matHeaderCellDef>Webcam Name</mat-header-cell>
         <mat-cell *matCellDef="let webcam">{{ webcam.webcamName }}</mat-cell>
       </ng-container>
-      <mat-header-row *matHeaderRowDef="['webcamName']"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: ['webcamName']"></mat-row>
-    </mat-table>
+        <mat-header-row *matHeaderRowDef="['webcamName']"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: ['webcamName']"></mat-row>
+      </mat-table>
+    </div>
+    <ng-template #noWebcamsData>
+      <div class="no-data-message">
+        <p>No webcams data available for {{ selectedRoadId }}.</p>
+      </div>
+    </ng-template>
   </div>
   
-  <div *ngIf="restAreasData">
+  <div *ngIf="restAreasLoaded">
     <h2>Rest Areas</h2>
-    <mat-table [dataSource]="dataSourceRestArea" class="info-table">
+    <div *ngIf="restAreasData && restAreasData.length > 0; else noRestAreasData">
+      <mat-table [dataSource]="dataSourceRestArea" class="info-table">
       <ng-container matColumnDef="title">
         <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
         <mat-cell *matCellDef="let restArea" class="title-and-subtitle">
@@ -86,14 +99,21 @@
         </mat-cell>
       </ng-container>
   
-      <mat-header-row *matHeaderRowDef="['title', 'description',  'viewOnMap']"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: ['title', 'description', 'viewOnMap']"></mat-row>
-    </mat-table>
+        <mat-header-row *matHeaderRowDef="['title', 'description',  'viewOnMap']"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: ['title', 'description', 'viewOnMap']"></mat-row>
+      </mat-table>
+    </div>
+    <ng-template #noRestAreasData>
+      <div class="no-data-message">
+        <p>No rest areas data available for {{ selectedRoadId }}.</p>
+      </div>
+    </ng-template>
   </div>
   
-  <div *ngIf="trafficReportsData">
+  <div *ngIf="trafficReportsLoaded">
     <h2>Traffic reports</h2>
-    <mat-table [dataSource]="dataSourceTrafficReports" class="info-table">
+    <div *ngIf="trafficReportsData && trafficReportsData.length > 0; else noTrafficReportsData">
+      <mat-table [dataSource]="dataSourceTrafficReports" class="info-table">
       <ng-container matColumnDef="title">
         <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
         <mat-cell *matCellDef="let trafficReport" class="title-and-subtitle">
@@ -118,14 +138,21 @@
         </mat-cell>
       </ng-container>
       
-      <mat-header-row *matHeaderRowDef="['title', 'description',  'viewOnMap']"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: ['title', 'description', 'viewOnMap']"></mat-row>
-    </mat-table>
+        <mat-header-row *matHeaderRowDef="['title', 'description',  'viewOnMap']"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: ['title', 'description', 'viewOnMap']"></mat-row>
+      </mat-table>
+    </div>
+    <ng-template #noTrafficReportsData>
+      <div class="no-data-message">
+        <p>No traffic reports data available for {{ selectedRoadId }}.</p>
+      </div>
+    </ng-template>
   </div>
 
-  <div *ngIf="ClosuresData">
+  <div *ngIf="closuresLoaded">
     <h2>Closure</h2>
-    <mat-table [dataSource]="dataSourceClosure" class="info-table">
+    <div *ngIf="ClosuresData && ClosuresData.length > 0; else noClosuresData">
+      <mat-table [dataSource]="dataSourceClosure" class="info-table">
       <ng-container matColumnDef="title">
         <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
         <mat-cell *matCellDef="let closure" class="title-and-subtitle">
@@ -150,14 +177,21 @@
         </mat-cell>
       </ng-container>
       
-      <mat-header-row *matHeaderRowDef="['title', 'description',  'viewOnMap']"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: ['title', 'description', 'viewOnMap']"></mat-row>
-    </mat-table>
+        <mat-header-row *matHeaderRowDef="['title', 'description',  'viewOnMap']"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: ['title', 'description', 'viewOnMap']"></mat-row>
+      </mat-table>
+    </div>
+    <ng-template #noClosuresData>
+      <div class="no-data-message">
+        <p>No closures data available for {{ selectedRoadId }}.</p>
+      </div>
+    </ng-template>
   </div>
   
-  <div *ngIf="chargingStationsData">
+  <div *ngIf="chargingStationsLoaded">
     <h2>Charging Stations</h2>
-    <mat-table [dataSource]="dataSourceChargingStations" class="info-table">
+    <div *ngIf="chargingStationsData && chargingStationsData.length > 0; else noChargingStationsData">
+      <mat-table [dataSource]="dataSourceChargingStations" class="info-table">
       <ng-container matColumnDef="title">
         <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
         <mat-cell *matCellDef="let chargingStation" class="title-and-subtitle">
@@ -182,9 +216,13 @@
         </mat-cell>
       </ng-container>
   
-      <mat-header-row *matHeaderRowDef="['title', 'description',  'viewOnMap']"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: ['title', 'description', 'viewOnMap']"></mat-row>
-    </mat-table>
-    
-
+        <mat-header-row *matHeaderRowDef="['title', 'description',  'viewOnMap']"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: ['title', 'description', 'viewOnMap']"></mat-row>
+      </mat-table>
+    </div>
+    <ng-template #noChargingStationsData>
+      <div class="no-data-message">
+        <p>No charging stations data available for {{ selectedRoadId }}.</p>
+      </div>
+    </ng-template>
   </div>

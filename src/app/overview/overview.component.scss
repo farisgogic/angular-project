@@ -18,6 +18,7 @@ h2 {
 .mat-select {
   width: 15%;
   height: 40px;
+  min-width: 120px;
 }
 
 button {
@@ -48,5 +49,67 @@ button {
     font-weight: normal;
     font-size: small;
     margin-top: 10px;
+  }
+}
+
+/* Mobile responsiveness for overview */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 15px;
+  }
+
+  .road-selection {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .mat-select {
+    width: 100%;
+    min-width: auto;
+  }
+
+  button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .info-table {
+    font-size: 14px;
+  }
+
+  .mat-cell {
+    margin: 8px;
+    padding: 8px;
+  }
+}
+
+/* No data message styling */
+.no-data-message {
+  text-align: center;
+  padding: 40px 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  margin: 20px 0;
+  border: 1px solid #dee2e6;
+}
+
+.no-data-message p {
+  color: #6c757d;
+  font-style: italic;
+  margin: 0;
+  font-size: 16px;
+}
+
+@media (max-width: 768px) {
+  .no-data-message {
+    padding: 20px 15px;
+    margin: 15px 0;
+  }
+  
+  .no-data-message p {
+    font-size: 14px;
   }
 }

@@ -5,7 +5,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { MatIconModule, MatInputModule, MatPaginatorModule, MatSelectModule, MatSortModule, MatTableModule } from '@angular/material';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MapComponent } from './map/map.component';
 import { OverviewComponent } from './overview/overview.component';
@@ -29,6 +35,7 @@ import { OverviewComponent } from './overview/overview.component';
     BrowserAnimationsModule,
     MatSortModule,
     MatPaginatorModule,
+    MatButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

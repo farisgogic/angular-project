@@ -2,7 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { DataService } from '../data.service';
 import { Router } from '@angular/router';
 import { ChargingStation, Closure, RestArea, Roadwork, TrafficReport, Webcam } from '../data.model';
-import { MatPaginator, MatTableDataSource } from '@angular/material';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-overview',
@@ -120,6 +121,7 @@ export class OverviewComponent implements OnInit{
   }
   
   openGoogleMaps() {
-    this.router.navigate(['/map', this.selectedRoadId]);
+    const url = `/map/${this.selectedRoadId}`;
+    window.open(url, '_blank');
   }
 }
